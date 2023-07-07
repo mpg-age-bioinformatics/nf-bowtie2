@@ -1,0 +1,8 @@
+{ 
+  "project_folder" : "/Users/YWang/nf/nf-flexbar-test" ,
+  "trimmed_raw" : "/Users/YWang/nf/nf-flexbar-test/trimmed_raw" ,
+  "GENOME" : "/Users/YWang/nf/nf-flexbar-test/toplevel_bowtie2/index.fa" ,
+  "seq" : "paired",
+  "suffix_single" : ".fastq.gz",
+  "suffix_paired" : "_{1,2}.fastq.gz"
+}

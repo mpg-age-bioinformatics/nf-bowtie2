@@ -1,0 +1,5 @@
+.nextflow*
+work
+myscript
+main.nf_
+.DS_Store
