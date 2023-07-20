@@ -16,14 +16,17 @@ process get_images {
           then
             singularity pull bowtie2-2.4.2.sif docker://index.docker.io/mpgagebioinformatics/bowtie2:2.4
         fi
-
+        if [[ ! -f samtools-1.16.1.sif ]] ;
+          then
+            singularity pull samtools-1.16.1.sif docker://index.docker.io/mpgagebioinformatics/samtools:1.16.1
+        fi
     fi
 
 
     if [[ "${params.run_type}" == "local" ]] ; 
       then
         docker pull mpgagebioinformatics/bowtie2:2.4.2
-        
+        docker pull mpgagebioinformatics/samtools:1.16.1     
     fi
 
     """
@@ -80,6 +83,24 @@ process get_images {
 // }
 
 
+process flagstat {
+  stageInMode 'symlink'
+  stageOutMode 'move'
+
+  input:
+    val pair_id
+    tuple val(pair_id), path(fastq)
+
+  when:
+    ( ! file("${params.project_folder}/bowtie2_output/${pair_id}.flagstat.txt").exists() ) 
+
+
+  script:
+    """
+    cd /workdir/bowtie2_output/
+    samtools flagstat ${pair_id}.sam > ${pair_id}.flagstat.txt
+    """
+} 
 
 process mapping {
   stageInMode 'symlink'
@@ -137,4 +158,5 @@ workflow {
     read_files=Channel.fromFilePairs( "${params.trimmed_raw}/*${suffix}", size: -1 )
     read_files.view()
     mapping(read_files)
+    flagstat( mapping.out.collect(), read_files )
 }

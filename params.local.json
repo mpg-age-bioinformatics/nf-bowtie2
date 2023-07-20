@@ -4,5 +4,6 @@
   "GENOME" : "/Users/YWang/nf/nf-flexbar-test/toplevel_bowtie2/index.fa" ,
   "seq" : "paired",
   "suffix_single" : ".fastq.gz",
-  "suffix_paired" : "_{1,2}.fastq.gz"
+  "suffix_paired" : "_{1,2}.fastq.gz",
+  "remove_mito" : "yes"
 }
