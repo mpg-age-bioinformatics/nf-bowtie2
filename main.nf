@@ -266,8 +266,7 @@ workflow flagstat {
     
 }
 
-workflow count {
-  main:
+workflow qccount {
     data=Channel.fromPath( ["${params.project_folder}/bowtie2_output/*.sam"] )
     qc_count(data)
 }

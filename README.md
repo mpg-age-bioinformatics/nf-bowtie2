@@ -27,26 +27,29 @@ Run the workflow:
 fastqc
 ```
 PROFILE=raven
-nextflow run nf-fastqc -params-file params.json -entry images -profile ${PROFILE} 
-nextflow run nf-fastqc -params-file params.json -profile ${PROFILE}
+nextflow run nf-fastqc -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
+nextflow run nf-fastqc -params-file ~/nf_atacseq_test/params.json -profile ${PROFILE}
 ```
 
 flexbar trimming
 ```
-nextflow run nf-flexbar -params-file params.json -entry images -profile ${PROFILE} 
-nextflow run nf-flexbar -params-file params.json -profile ${PROFILE}
+nextflow run nf-flexbar -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
+nextflow run nf-flexbar -params-file ~/nf_atacseq_test/params.json -profile ${PROFILE}
 ```
 
 bowtie2
 ```
-nextflow run nf-bowtie2 -params-file params.json -entry images -profile ${PROFILE} 
-nextflow run nf-kallisto -params-file params.json -entry images -profile ${PROFILE} 
+nextflow run nf-bowtie2 -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
+nextflow run nf-kallisto -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
 
-nextflow run nf-kallisto -params-file  ~/nf_atacseq_test/params.json -entry get_genome  -profile raven
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry index -profile raven
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry align -profile raven
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry mito -profile raven
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry picard -profile raven
+nextflow run nf-kallisto -params-file  ~/nf_atacseq_test/params.json -entry get_genome  -profile raven && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry index -profile raven && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry align -profile raven && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry mito -profile raven && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry picard -profile raven && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry flagstat -profile raven && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry qccount -profile raven
+
 ```
 
 ## Contributing
