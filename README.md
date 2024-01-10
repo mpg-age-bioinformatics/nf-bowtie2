@@ -1,4 +1,4 @@
-# nf-flexbar
+# nf-bowtie2
 
 Create the test directory:
 ```
