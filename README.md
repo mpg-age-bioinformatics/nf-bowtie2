@@ -42,13 +42,13 @@ bowtie2
 nextflow run nf-bowtie2 -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
 nextflow run nf-kallisto -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
 
-nextflow run nf-kallisto -params-file  ~/nf_atacseq_test/params.json -entry get_genome  -profile raven && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry index -profile raven && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry align -profile raven && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry mito -profile raven && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry picard -profile raven && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry flagstat -profile raven && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry qccount -profile raven
+nextflow run nf-kallisto -params-file  ~/nf_atacseq_test/params.json -entry get_genome  -profile ${PROFILE} && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry index -profile ${PROFILE} && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry align -profile ${PROFILE} && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry mito -profile ${PROFILE} && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry picard -profile ${PROFILE} && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry flagstat -profile ${PROFILE} && \
+nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry qccount -profile ${PROFILE}
 
 ```
 
