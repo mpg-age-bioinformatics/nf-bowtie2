@@ -1,0 +1,19 @@
+{ 
+  "project_folder" : "/raven/u/wangy/nf_atacseq_test" ,
+  "fastqc_raw_data" : "/raven/u/wangy/nf_atacseq_test/raw_data" ,
+  "flexbar_raw_data" : "/raven/u/wangy/nf_atacseq_test/raw_data" ,
+  "fastqc_output_flexbar": "/raven/u/wangy/nf_atacseq_test/fastqc_output" ,
+  "adapter_seq" : "CTGTCTCTTATACACATCT" ,
+  "kallisto_raw_data" : "/raven/u/wangy/nf_atacseq_test/raw_data" ,
+  "genomes" : "/raven/u/wangy/nf_atacseq_test" ,
+  "organism" : "homo_sapiens" ,
+  "release" : "105" ,
+  "url_gtf" : "ftp://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/" ,
+  "url_dna" : "ftp://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/" ,
+  "ercc_label" : "ercc92" ,
+  "url_ercc_gtf" : "https://datashare.mpcdf.mpg.de/s/MOxbNrXeBNcg9wt/download" ,
+  "url_ercc_fa" : "https://datashare.mpcdf.mpg.de/s/H9PQu3vDRi9saqV/download" ,
+  "bowtie_raw_data" : "/raven/u/wangy/nf_atacseq_test/trimmed_raw" ,
+  "seq" : "single",
+  "remove_mito" : "yes"
+}

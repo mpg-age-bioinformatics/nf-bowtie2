@@ -116,7 +116,7 @@ process remove_mito {
     if [ ${single} = true ]; then
 
       if [ ${params.remove_mito} = "yes" ] ; then
-        awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | samtools view -@ 10 -q 10 -f 2 -bS - > ${pair_id}.bam
+        awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | samtools view -@ 10 -q 10 -bS - > ${pair_id}.bam
       else
         samtools view -@ 10 -q 10 -f 2 -bS ${pair_id}.sam > ${pair_id}.bam
       fi
@@ -124,20 +124,22 @@ process remove_mito {
     else
 
       if [ ${params.remove_mito} = "yes" ] ; then
-        awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | samtools view -@ 10 -q 10 -bS - > ${pair_id}.bam
+        awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | samtools view -@ 10 -q 10 -f 2 -bS - > ${pair_id}.bam
       else
         samtools view -@ 10 -q 10 -bS ${pair_id}.sam > ${pair_id}.bam
       fi
       
     fi
 
-    samtools sort -@ 10 -o${pair_id}.ss.bam ${pair_id}.bam
-    samtools index ${pair_id}.ss.bam
-    awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | wc -l > ${pair_id}.mito.txt
-    awk '{if (\$3 == "MT" ) print }' ${pair_id}.sam | wc -l >> ${pair_id}.mito.txt
+samtools sort -@ 10 -o ${pair_id}.ss.bam ${pair_id}.bam
+samtools index ${pair_id}.ss.bam
+awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | wc -l > ${pair_id}.mito.txt
+awk '{if (\$3 == "MT" ) print }' ${pair_id}.sam | wc -l >> ${pair_id}.mito.txt
+
     """
 }  
 
+    
 process remove_duplicates {
   stageInMode 'symlink'
   stageOutMode 'move'

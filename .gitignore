@@ -3,4 +3,5 @@ work
 myscript
 main.nf_
 .DS_Store
-params.json
+params.local.json
+params.slurm.json

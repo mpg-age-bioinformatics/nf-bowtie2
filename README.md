@@ -16,7 +16,7 @@ curl -J -O https://datashare.mpcdf.mpg.de/s/ktjFjaIcLP3lEw0/download
 Download the paramaters file:
 ```
 cd ~/nf_atacseq_test
-curl -J -O https://raw.githubusercontent.com/mpg-age-bioinformatics/nf-flexbar/main/params.json
+curl -J -O https://raw.githubusercontent.com/mpg-age-bioinformatics/nf-bowtie2/main/params.json
 ```
 
 Change the parameters in params.json accordingly, e.g. change "project_folder" : "/raven/u/wangy/nf_atacseq_test/" to "project_folder" : Users/YOURNAME/nf-flexbar-test/"
