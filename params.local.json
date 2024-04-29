@@ -1,9 +1,15 @@
 { 
-  "project_folder" : "/Users/YWang/nf/nf-flexbar-test" ,
-  "trimmed_raw" : "/Users/YWang/nf/nf-flexbar-test/trimmed_raw" ,
-  "GENOME" : "/Users/YWang/nf/nf-flexbar-test/toplevel_bowtie2/index.fa" ,
-  "seq" : "paired",
-  "suffix_single" : ".fastq.gz",
-  "suffix_paired" : "_{1,2}.fastq.gz",
+  "project_folder" : "/tmp/nextflow_atac_loacal_test" ,
+  "kallisto_raw_data" : "/tmp/nextflow_atac_loacal_test/raw_data" ,
+  "genomes" : "/tmp/nextflow_atac_loacal_test" ,
+  "organism" : "mus_musculus" ,
+  "release" : "105" ,
+  "url_gtf" : "ftp://ftp.ensembl.org/pub/release-105/gtf/mus_musculus/" ,
+  "url_dna" : "ftp://ftp.ensembl.org/pub/release-105/fasta/mus_musculus/dna/" ,
+  "ercc_label" : "ercc92" ,
+  "url_ercc_gtf" : "https://datashare.mpcdf.mpg.de/s/MOxbNrXeBNcg9wt/download" ,
+  "url_ercc_fa" : "https://datashare.mpcdf.mpg.de/s/H9PQu3vDRi9saqV/download" ,
+  "bowtie_raw_data" : "/tmp/nextflow_atac_loacal_test/trimmed_raw" ,
+  "seq" : "single",
   "remove_mito" : "yes"
 }
