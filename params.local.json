@@ -1,7 +1,7 @@
 { 
-  "project_folder" : "/tmp/nextflow_atac_loacal_test" ,
-  "kallisto_raw_data" : "/tmp/nextflow_atac_loacal_test/raw_data" ,
-  "genomes" : "/tmp/nextflow_atac_loacal_test" ,
+  "project_folder" : "/tmp/nextflow_atac_local_test" ,
+  "kallisto_raw_data" : "/tmp/nextflow_atac_local_test/raw_data" ,
+  "genomes" : "/tmp/nextflow_atac_local_test" ,
   "organism" : "mus_musculus" ,
   "release" : "105" ,
   "url_gtf" : "ftp://ftp.ensembl.org/pub/release-105/gtf/mus_musculus/" ,
@@ -9,7 +9,7 @@
   "ercc_label" : "ercc92" ,
   "url_ercc_gtf" : "https://datashare.mpcdf.mpg.de/s/MOxbNrXeBNcg9wt/download" ,
   "url_ercc_fa" : "https://datashare.mpcdf.mpg.de/s/H9PQu3vDRi9saqV/download" ,
-  "bowtie_raw_data" : "/tmp/nextflow_atac_loacal_test/trimmed_raw" ,
+  "bowtie_raw_data" : "/tmp/nextflow_atac_local_test/trimmed_raw" ,
   "seq" : "single",
   "remove_mito" : "yes"
 }

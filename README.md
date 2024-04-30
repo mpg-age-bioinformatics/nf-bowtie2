@@ -19,7 +19,7 @@ cd ~/nf_atacseq_test
 curl -J -O https://raw.githubusercontent.com/mpg-age-bioinformatics/nf-bowtie2/main/params.local.json
 ```
 
-
+git clone git clone https://github.com/mpg-age-bioinformatics/nf-kallisto.git
 git clone https://github.com/mpg-age-bioinformatics/nf-bowtie2.git
 
 
@@ -28,28 +28,30 @@ Run the workflow:
 fastqc
 ```
 PROFILE=raven
-nextflow run nf-fastqc -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
-nextflow run nf-fastqc -params-file ~/nf_atacseq_test/params.json -profile ${PROFILE}
+nextflow run nf-fastqc -params-file params.local.json -entry images 
+nextflow run nf-fastqc -params-file params.local.json
 ```
 
 flexbar trimming
 ```
-nextflow run nf-flexbar -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
-nextflow run nf-flexbar -params-file ~/nf_atacseq_test/params.json -profile ${PROFILE}
+nextflow run nf-flexbar -params-file params.local.json -entry images 
+nextflow run nf-flexbar -params-file params.local.json
 ```
 
 bowtie2
 ```
-nextflow run nf-bowtie2 -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
-nextflow run nf-kallisto -params-file ~/nf_atacseq_test/params.json -entry images -profile ${PROFILE} 
+nextflow run nf-bowtie2 -params-file params.local.json -entry images  
+nextflow run nf-kallisto -params-file params.local.json -entry images  
 
-nextflow run nf-kallisto -params-file  ~/nf_atacseq_test/params.json -entry get_genome  -profile ${PROFILE} && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry index -profile ${PROFILE} && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry align -profile ${PROFILE} && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry mito -profile ${PROFILE} && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry picard -profile ${PROFILE} && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry flagstat -profile ${PROFILE} && \
-nextflow run nf-bowtie2 -params-file  ~/nf_atacseq_test/params.json -entry qccount -profile ${PROFILE}
+nextflow run nf-kallisto -params-file  params.local.json -entry get_genome --user "$(id -u):$(id -g)" 
+
+nextflow run nf-kallisto -params-file  params.local.json -entry get_genome  && \
+nextflow run nf-bowtie2 -params-file  params.local.json -entry index && \
+nextflow run nf-bowtie2 -params-file  params.local.json -entry align && \
+nextflow run nf-bowtie2 -params-file  params.local.json -entry mito && \
+nextflow run nf-bowtie2 -params-file  params.local.json -entry picard && \
+nextflow run nf-bowtie2 -params-file  params.local.json -entry flagstat && \
+nextflow run nf-bowtie2 -params-file  params.local.json -entry qccount
 
 ```
 
