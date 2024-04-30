@@ -47,7 +47,7 @@ process bowtie2_indexer {
   script:
     """
 
-    target_folder=genomes/${params.organism}/${params.release}/toplevel_bowtie2
+    target_folder=/genomes/${params.organism}/${params.release}/toplevel_bowtie2
 
     if [[ ! -e \$target_folder ]] ; then mkdir -p \$target_folder ; fi
 
@@ -80,13 +80,13 @@ process mapping {
   if ( single ) {
     """
         mkdir -p /workdir/bowtie2_output
-        bowtie2 -p ${task.cpus} -x ${params.genomes}/${params.organism}/${params.release}/toplevel_bowtie2/index.fa -U /trimmed_raw/${pair_id}.fastq.gz -S /workdir/bowtie2_output/${pair_id}.sam
+        bowtie2 -p ${task.cpus} -x /genomes/${params.organism}/${params.release}/toplevel_bowtie2/index.fa -U /trimmed_raw/${pair_id}.fastq.gz -S /workdir/bowtie2_output/${pair_id}.sam
     """
   } 
   else { 
     """
       mkdir -p /workdir/bowtie2_output
-      bowtie2 -p ${task.cpus} -x ${params.genomes}/${params.organism}/${params.release}/toplevel_bowtie2/index.fa -1 /trimmed_raw/${pair_id}_1.fastq.gz -2 /trimmed_raw/${pair_id}_2.fastq.gz -S /workdir/bowtie2_output/${pair_id}.sam
+      bowtie2 -p ${task.cpus} -x /genomes/${params.organism}/${params.release}/toplevel_bowtie2/index.fa -1 /trimmed_raw/${pair_id}_1.fastq.gz -2 /trimmed_raw/${pair_id}_2.fastq.gz -S /workdir/bowtie2_output/${pair_id}.sam
     """
   }
 }
