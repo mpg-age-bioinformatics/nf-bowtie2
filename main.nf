@@ -47,7 +47,7 @@ process bowtie2_indexer {
   script:
     """
 
-    target_folder=${params.genomes}/${params.organism}/${params.release}/toplevel_bowtie2
+    target_folder=genomes/${params.organism}/${params.release}/toplevel_bowtie2
 
     if [[ ! -e \$target_folder ]] ; then mkdir -p \$target_folder ; fi
 
