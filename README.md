@@ -2,12 +2,12 @@
 
 Create the test directory:
 ```
-mkdir -p ~/nf_atacseq_test/raw_data
+mkdir -p /tmp/nextflow_atac_local_test/raw_data
 ```
 
 Download the demo data:
 ```
-cd ~/nf_atacseq_test/raw_data
+cd /tmp/nextflow_atac_local_test/raw_data
 curl -J -O https://datashare.mpcdf.mpg.de/s/ACJ6T5TVTcvR6fm/download
 curl -J -O https://datashare.mpcdf.mpg.de/s/ktjFjaIcLP3lEw0/download
 
@@ -15,28 +15,30 @@ curl -J -O https://datashare.mpcdf.mpg.de/s/ktjFjaIcLP3lEw0/download
 
 Download the paramaters file:
 ```
-cd ~/nf_atacseq_test
+cd /tmp/nextflow_atac_local_test
+PARAMS=params.local.json
 curl -J -O https://raw.githubusercontent.com/mpg-age-bioinformatics/nf-bowtie2/main/${PARAMS}
 ```
 
-git clone git clone https://github.com/mpg-age-bioinformatics/nf-kallisto.git
+Get the latest repo:
+```
+git clone https://github.com/mpg-age-bioinformatics/nf-fastqc.git
+git clone https://github.com/mpg-age-bioinformatics/nf-kallisto.git
 git clone https://github.com/mpg-age-bioinformatics/nf-bowtie2.git
-
+```
 
 Run the workflow:
 
-
 fastqc
 ```
-PARAMS=params.local.json
-nextflow run nf-fastqc -params-file ${PARAMS} -entry images 
-nextflow run nf-fastqc -params-file ${PARAMS}
+nextflow run nf-fastqc -params-file ${PARAMS} -entry images --user "$(id -u):$(id -g)"  
+nextflow run nf-fastqc -params-file ${PARAMS} --user "$(id -u):$(id -g)"  
 ```
 
 flexbar trimming
 ```
-nextflow run nf-flexbar -params-file ${PARAMS} -entry images 
-nextflow run nf-flexbar -params-file ${PARAMS}
+nextflow run nf-flexbar -params-file ${PARAMS} -entry images --user "$(id -u):$(id -g)"  
+nextflow run nf-flexbar -params-file ${PARAMS} --user "$(id -u):$(id -g)"  
 ```
 
 bowtie2
@@ -44,14 +46,13 @@ bowtie2
 nextflow run nf-bowtie2 -params-file ${PARAMS} -entry images --user "$(id -u):$(id -g)"
 nextflow run nf-kallisto -params-file ${PARAMS} -entry images --user "$(id -u):$(id -g)"
 
-nextflow run nf-kallisto -params-file  ${PARAMS} -entry get_genome --user "$(id -u):$(id -g)" && \
-nextflow run nf-bowtie2 -params-file  ${PARAMS} -entry index --user "$(id -u):$(id -g)" && \
-nextflow run nf-bowtie2 -params-file  ${PARAMS} -entry align --user "$(id -u):$(id -g)" && \
-nextflow run nf-bowtie2 -params-file  ${PARAMS} -entry mito --user "$(id -u):$(id -g)" && \
-nextflow run nf-bowtie2 -params-file  ${PARAMS} -entry picard --user "$(id -u):$(id -g)" && \
-nextflow run nf-bowtie2 -params-file  ${PARAMS} -entry flagstat --user "$(id -u):$(id -g)" && \
-nextflow run nf-bowtie2 -params-file  ${PARAMS} -entry qccount --user "$(id -u):$(id -g)" 
-
+nextflow run nf-kallisto -params-file ${PARAMS} -entry get_genome --user "$(id -u):$(id -g)" && \
+nextflow run nf-bowtie2 -params-file ${PARAMS} -entry index --user "$(id -u):$(id -g)" && \
+nextflow run nf-bowtie2 -params-file ${PARAMS} -entry align --user "$(id -u):$(id -g)" && \
+nextflow run nf-bowtie2 -params-file ${PARAMS} -entry mito --user "$(id -u):$(id -g)" && \
+nextflow run nf-bowtie2 -params-file ${PARAMS} -entry picard --user "$(id -u):$(id -g)" && \
+nextflow run nf-bowtie2 -params-file ${PARAMS} -entry flagstat --user "$(id -u):$(id -g)" && \
+nextflow run nf-bowtie2 -params-file ${PARAMS} -entry qccount --user "$(id -u):$(id -g)" 
 ```
 
 ## Contributing
