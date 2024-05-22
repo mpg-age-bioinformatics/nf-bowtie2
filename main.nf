@@ -116,22 +116,22 @@ process remove_mito {
     if [ ${single} = true ]; then
 
       if [ ${params.remove_mito} = "yes" ] ; then
-        awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | samtools view -@ 10 -q 10 -bS - > ${pair_id}.bam
+        awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | samtools view -@ ${task.cpus} -q 10 -bS - > ${pair_id}.bam
       else
-        samtools view -@ 10 -q 10 -f 2 -bS ${pair_id}.sam > ${pair_id}.bam
+        samtools view -@ ${task.cpus} -q 10 -f 2 -bS ${pair_id}.sam > ${pair_id}.bam
       fi
     
     else
 
       if [ ${params.remove_mito} = "yes" ] ; then
-        awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | samtools view -@ 10 -q 10 -f 2 -bS - > ${pair_id}.bam
+        awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | samtools view -@ ${task.cpus} -q 10 -f 2 -bS - > ${pair_id}.bam
       else
-        samtools view -@ 10 -q 10 -bS ${pair_id}.sam > ${pair_id}.bam
+        samtools view -@ ${task.cpus} -q 10 -bS ${pair_id}.sam > ${pair_id}.bam
       fi
       
     fi
 
-samtools sort -@ 10 -o ${pair_id}.ss.bam ${pair_id}.bam
+samtools sort -@ ${task.cpus} -o ${pair_id}.ss.bam ${pair_id}.bam
 samtools index ${pair_id}.ss.bam
 awk '{if (\$3 != "MT" ) print }' ${pair_id}.sam | wc -l > ${pair_id}.mito.txt
 awk '{if (\$3 == "MT" ) print }' ${pair_id}.sam | wc -l >> ${pair_id}.mito.txt
@@ -197,9 +197,9 @@ process qc_count {
     """
     cd /workdir/bowtie2_output/
     input_file_name=\$(basename ${input_file} .sam)
-    samtools view -@ 10 -c ${input_file} > \${input_file_name}.count.txt
-    samtools view -@ 10 -q 10 -c ${input_file} >> \${input_file_name}.count.txt
-    samtools view -@ 10 -q 10 -f 2 -c ${input_file} >> \${input_file_name}.count.txt
+    samtools view -@ ${task.cpus} -c ${input_file} > \${input_file_name}.count.txt
+    samtools view -@ ${task.cpus} -q 10 -c ${input_file} >> \${input_file_name}.count.txt
+    samtools view -@ ${task.cpus} -q 10 -f 2 -c ${input_file} >> \${input_file_name}.count.txt
     """
 } 
 
