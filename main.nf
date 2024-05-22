@@ -157,7 +157,7 @@ process remove_duplicates {
 
   input_file_name=\$(basename ${input_file} .ss.bam)
 
-  java -Xmx16g -jar /PICARD/picard.jar MarkDuplicates I=${input_file}\
+  java -Xmx${task.picard_mem} -jar /PICARD/picard.jar MarkDuplicates I=${input_file}\
 	O=\${input_file_name}.md.bam CREATE_INDEX=true \
 	TMP_DIR=${params.project_folder}/tmp M=\${input_file_name}.md_metrics.txt REMOVE_DUPLICATES=true
   """
