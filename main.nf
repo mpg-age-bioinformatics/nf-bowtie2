@@ -79,14 +79,14 @@ process mapping {
 
   if ( single ) {
     """
-        mkdir -p /workdir/bowtie2_output
-        bowtie2 -p ${task.cpus} -x /genomes/${params.organism}/${params.release}/toplevel_bowtie2/index.fa -U /trimmed_raw/${pair_id}.fastq.gz -S /workdir/bowtie2_output/${pair_id}.sam
+        mkdir -p ${params.project_folder}/bowtie2_output
+        bowtie2 -p ${task.cpus} -x /genomes/${params.organism}/${params.release}/toplevel_bowtie2/index.fa -U /trimmed_raw/${pair_id}.fastq.gz -S ${params.project_folder}/bowtie2_output/${pair_id}.sam
     """
   } 
   else { 
     """
-      mkdir -p /workdir/bowtie2_output
-      bowtie2 -p ${task.cpus} -x /genomes/${params.organism}/${params.release}/toplevel_bowtie2/index.fa -1 /trimmed_raw/${pair_id}_1.fastq.gz -2 /trimmed_raw/${pair_id}_2.fastq.gz -S /workdir/bowtie2_output/${pair_id}.sam
+      mkdir -p ${params.project_folder}/bowtie2_output
+      bowtie2 -p ${task.cpus} -x /genomes/${params.organism}/${params.release}/toplevel_bowtie2/index.fa -1 /trimmed_raw/${pair_id}_1.fastq.gz -2 /trimmed_raw/${pair_id}_2.fastq.gz -S ${params.project_folder}/bowtie2_output/${pair_id}.sam
     """
   }
 }
@@ -111,7 +111,7 @@ process remove_mito {
     """
     echo ${single}
 
-    cd /workdir/bowtie2_output/
+    cd ${params.project_folder}/bowtie2_output/
 
     if [ ${single} = true ]; then
 
@@ -152,14 +152,14 @@ process remove_duplicates {
 
   script:
   """
-  cd /workdir/bowtie2_output/
-  mkdir -p /workdir/tmp
+  cd ${params.project_folder}/bowtie2_output/
+  mkdir -p ${params.project_folder}/tmp
 
   input_file_name=\$(basename ${input_file} .ss.bam)
 
   java -Xmx16g -jar /PICARD/picard.jar MarkDuplicates I=${input_file}\
 	O=\${input_file_name}.md.bam CREATE_INDEX=true \
-	TMP_DIR=/workdir/tmp M=\${input_file_name}.md_metrics.txt REMOVE_DUPLICATES=true
+	TMP_DIR=${params.project_folder}/tmp M=\${input_file_name}.md_metrics.txt REMOVE_DUPLICATES=true
   """
 
 }
@@ -176,7 +176,7 @@ process samtools_flagstat {
 
   script:
     """
-    cd /workdir/bowtie2_output/
+    cd ${params.project_folder}/bowtie2_output/
     input_file_name=\$(basename ${input_file} .bam)
     samtools flagstat ${input_file} > \${input_file_name}.flagstat.txt
     """
@@ -195,7 +195,7 @@ process qc_count {
 
   script:
     """
-    cd /workdir/bowtie2_output/
+    cd ${params.project_folder}/bowtie2_output/
     input_file_name=\$(basename ${input_file} .sam)
     samtools view -@ ${task.cpus} -c ${input_file} > \${input_file_name}.count.txt
     samtools view -@ ${task.cpus} -q 10 -c ${input_file} >> \${input_file_name}.count.txt
